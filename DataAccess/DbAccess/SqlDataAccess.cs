@@ -14,9 +14,9 @@ public class SqlDataAccess : ISqlDataAccess
         _config = config;
     }
 
-    public async Task<IEnumerable<T>> LoadDataAsync<T>(
+    public async Task<IEnumerable<T>> LoadDataAsync<T,TU>(
         string sqlQuery,
-        DynamicParameters parameters,
+        TU parameters,
         string connectionId = "Default")
     {
         await using var connection = new NpgsqlConnection(_config.GetConnectionString(connectionId));
@@ -26,7 +26,7 @@ public class SqlDataAccess : ISqlDataAccess
         var users = await connection.QueryAsync<T>(
             sqlQuery,
             param: parameters,
-            commandType: CommandType.Text
+            commandType: CommandType.StoredProcedure
             );
         
         return users;
@@ -44,7 +44,7 @@ public class SqlDataAccess : ISqlDataAccess
         await connection.ExecuteAsync(
             sqlQuery,
             parameters,
-            commandType: CommandType.Text
+            commandType: CommandType.StoredProcedure
             );
     }
 }

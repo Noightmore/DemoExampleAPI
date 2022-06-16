@@ -3,7 +3,7 @@ CREATE FUNCTION user_GetOne_ById(id_in int)
         UID int,
         UFirstName varchar,
         ULastName varchar,
-        UGender boolean,
+        UGender varchar,
         UEmail varchar,
         UBirthDate date
     )
@@ -14,7 +14,10 @@ BEGIN
         cast(id AS integer),
         first_name,
         last_name,
-        gender,
+        CASE
+            WHEN gender THEN cast('male' AS varchar)
+            ELSE cast('female' AS varchar)
+        END,
         email,
         date_of_birth
     FROM

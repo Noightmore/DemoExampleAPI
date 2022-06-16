@@ -3,7 +3,7 @@ CREATE FUNCTION user_GetAll()
         UID int,
         UFirstName varchar,
         ULastName varchar,
-        UGender boolean,
+        UGender varchar,
         UEmail varchar,
         UBirthDate date
     )
@@ -11,10 +11,13 @@ AS
 $BODY$
 BEGIN
      RETURN QUERY SELECT
-        cast(id AS int),
+        cast(id AS integer),
         first_name,
         last_name,
-        gender,
+        CASE
+            WHEN gender THEN cast('male' AS varchar)
+            ELSE cast('female' AS varchar)
+        END,
         email,
         date_of_birth
 

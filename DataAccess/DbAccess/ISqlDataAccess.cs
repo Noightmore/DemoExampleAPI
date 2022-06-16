@@ -1,12 +1,10 @@
-using Dapper;
-
 namespace DataAccess.DbAccess;
 
 public interface ISqlDataAccess
 {
-    Task<IEnumerable<T>> LoadDataAsync<T>(
+    Task<IEnumerable<T>> LoadDataAsync<T,TU>(
         string sqlQuery,
-        DynamicParameters parameters,
+        TU parameters,
         string connectionId = "Default");
 
     Task SaveDataAsync<T>(
