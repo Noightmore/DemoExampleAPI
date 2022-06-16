@@ -3,12 +3,12 @@ namespace DataAccess.DbAccess;
 public interface ISqlDataAccess
 {
     Task<IEnumerable<T>> LoadDataAsync<T,TU>(
-        string sqlQuery,
+        string postgresFunctionName,
         TU parameters,
         string connectionId = "Default");
 
     Task SaveDataAsync<T>(
-        string sqlQuery,
+        string postgresFunctionName,
         T parameters,
         string connectionId = "Default");
 }

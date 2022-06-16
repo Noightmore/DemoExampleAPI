@@ -38,8 +38,19 @@ public class UserData : IUserData
                 date_of_birth_in = user.UBirthDate.ToString(CultureInfo.CurrentCulture)
             }
         );
-    } 
+    }
 
+    public Task UpdateUser(UserModel user) => 
+        _db.SaveDataAsync("user_updateinstance", new
+        {
+            id_in = user.UID,
+            first_n = user.UFirstName,
+            last_n = user.ULastName,
+            gender_in = user.UGender,
+            email_in = user.UEmail,
+            date_of_birth_in = user.UBirthDate.ToString(CultureInfo.CurrentCulture)
+        });
+    
     public Task DeleteUser(int id) => 
         _db.SaveDataAsync("user_deleteone_byid", new {Id = id});
 }

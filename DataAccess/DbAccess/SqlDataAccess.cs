@@ -15,16 +15,15 @@ public class SqlDataAccess : ISqlDataAccess
     }
 
     public async Task<IEnumerable<T>> LoadDataAsync<T,TU>(
-        string sqlQuery,
+        string postgresFunctionName,
         TU parameters,
         string connectionId = "Default")
     {
         await using var connection = new NpgsqlConnection(_config.GetConnectionString(connectionId));
-        //connection.Open();
         await connection.OpenAsync();
 
         var users = await connection.QueryAsync<T>(
-            sqlQuery,
+            postgresFunctionName,
             param: parameters,
             commandType: CommandType.StoredProcedure
             );
@@ -32,9 +31,8 @@ public class SqlDataAccess : ISqlDataAccess
         return users;
     }
     
-    // TODO
     public async Task SaveDataAsync<T>(
-        string sqlQuery,
+        string postgresFunctionName,
         T parameters,
         string connectionId = "Default")
     {
@@ -42,7 +40,7 @@ public class SqlDataAccess : ISqlDataAccess
         await connection.OpenAsync();
 
         await connection.ExecuteAsync(
-            sqlQuery,
+            postgresFunctionName,
             parameters,
             commandType: CommandType.StoredProcedure
             );
