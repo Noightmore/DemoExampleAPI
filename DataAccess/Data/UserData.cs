@@ -52,5 +52,5 @@ public class UserData : IUserData
         });
     
     public Task DeleteUser(int id) => 
-        _db.SaveDataAsync("user_deleteone_byid", new {Id = id});
+        _db.SaveDataAsync("user_deleteone_byid", new {id_in = id});
 }

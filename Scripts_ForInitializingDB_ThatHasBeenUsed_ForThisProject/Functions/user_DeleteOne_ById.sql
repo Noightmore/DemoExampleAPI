@@ -1,5 +1,5 @@
-CREATE PROCEDURE user_DeleteOne_ById(id_in int)
-
+CREATE FUNCTION user_DeleteOne_ById(id_in int)
+    RETURNS VOID
 AS
 $BODY$
 BEGIN
