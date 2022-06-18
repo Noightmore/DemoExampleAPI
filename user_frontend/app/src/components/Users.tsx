@@ -5,6 +5,8 @@ import axios from "axios";
 import LoadAllUsersButton from './LoadAllUsersButton';
 import UserList from "./UserList";
 
+
+
 const Users: React.FC = () => {
 
     let debug:any = require('debug');
@@ -16,16 +18,17 @@ const Users: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setIsLoading(true);
-        axios.get("http://localhost:7007/Users")
+        axios.get("http://localhost:5215/Users")
             .then(response => {
                 console.log(response.data);
                 setItems(response.data);
                 setError(false);
             })
-            // .catch(error => {
-            //     setError(true);
-            //     setItems([]);
-            // })
+            .catch(error => {
+                console.log(error);
+                setError(true);
+                setItems([]);
+            })
             .then(()=>{
                 setIsLoading(false);
             })
