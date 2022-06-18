@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Container, Navbar, Nav, NavbarBrand} from "reactstrap";
+import Users from './components/Users';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Navbar color="dark" light expand="md">
+            <NavbarBrand href="/">User loading test app</NavbarBrand>
+            <Nav className="mr-auto" navbar>
+            </Nav>
+        </Navbar>
+        <Container>
+            <Users/>
+        </Container>
     </div>
   );
 }
+
 
 export default App;
